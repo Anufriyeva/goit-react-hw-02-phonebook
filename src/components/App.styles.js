@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const AppContainer = styled.div`
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   background-color: #f7f7f7;
   border-radius: 8px;

@@ -7,29 +7,41 @@ import { nanoid } from 'nanoid';
 
 
 class App extends Component {
+  // state = {
+  //   contacts: [],
+  //   filter: '',
+  // };
   state = {
-    contacts: [],
+    contacts: [
+      {id: 'id-1', name: 'John Doe', number: '459-12-56'},
+      {id: 'id-2', name: 'Tyler Durden', number: '443-89-12'},
+      {id: 'id-3', name: 'Vincent Vega', number: '645-17-79'},
+      {id: 'id-4', name: 'Irene Adler', number: '227-91-26'},
+    ],
     filter: '',
-  };
+    name: '',
+    number: ''
+  }
 
   handleFilterChange = (filterValue) => {
     this.setState({ filter: filterValue });
   };
 
-  createContact = (newContactData) => {
-    const newId = nanoid();
-  
-    const newContact = { ...newContactData, id: newId };
-  
-    const isExist = this.state.contacts.some((contact) => contact.id === newId);
-  
+  createContact = newContactData => {
+    const isExist = this.state.contacts.find(
+      contact => contact.name === newContactData.name
+    );
+
     if (isExist) {
-      alert(`${newContact.name} is already in contacts.`);
-      return;
+      return alert(`${newContactData.name} is already in contacts`);
     }
-  
-    this.setState((prevState) => ({
-      contacts: [...prevState.contacts, newContact],
+    const newContact = {
+      ...newContactData,
+      id: nanoid(),
+    };
+
+    this.setState(prev => ({
+      contacts: [newContact, ...prev.contacts],
     }));
   };
 
